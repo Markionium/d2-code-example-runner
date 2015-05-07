@@ -1,0 +1,33 @@
+{
+  "name": "d2-code-example-runner",
+  "version": "0.2.0",
+  "description": "Highlights or runs code examples for d2. The DHIS2 javascript library.",
+  "main": "src/codeExamples.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark Polak",
+  "license": "BSD",
+  "files": [
+    "src/codeExamples.js",
+    "src/examplerunner.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Markionium/d2-code-example-runner.git"
+  },
+  "devDependencies": {},
+  "jspmNodeConversion": false,
+  "registry": "jspm",
+  "jspm": {
+    "directories": {},
+    "dependencies": {
+      "codemirror": "npm:codemirror@^5.2.0"
+    },
+    "devDependencies": {
+      "codemirror": "npm:codemirror@^5.2.0",
+      "babel": "npm:babel@^4.7.16",
+      "babel-runtime": "npm:babel-runtime@^4.7.16"
+    }
+  }
+}

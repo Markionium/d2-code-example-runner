@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <title>Codepen example</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.2.0/codemirror.css" rel="stylesheet" type="text/css" />
+    <link href="https://codemirror.net/theme/monokai.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <pre><code class="d2-runnable-code-example">d2.models.dataElement.get('fbfJHSPpUQD')
+    .then(function (dataElement) {
+        console.log(dataElement.name);
+
+        //Validate the model
+        dataElement.validate()
+            .then(function (status) {
+                console.log(status);
+            });
+    });
+        </code></pre>
+
+    <pre><code class="d2-runnable-code-example">d2.models.user.list()
+    .then(function (users) {
+        users.forEach(user => console.log(user));
+    });
+        </code></pre>
+
+    <pre><code class="d2-code-example">d2.models.dataElement.list()
+    .then(users => users.forEach(user => console.log(user)));
+    </code></pre>
+
+    <script src="jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script>
+        System.import('src/codeExamples')
+                .then(function (codeExamples) {
+                    codeExamples.default
+                            .init()
+                            .all();
+                });
+    </script>
+</body>
+</html>
