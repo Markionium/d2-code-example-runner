@@ -35,7 +35,7 @@
         System.import('src/codeExamples')
                 .then(function (codeExamples) {
                     codeExamples.default
-                            .init()
+                            .init(undefined, {url: 'https://apps.dhis2.org/dev/api'})
                             .all();
                 });
     </script>

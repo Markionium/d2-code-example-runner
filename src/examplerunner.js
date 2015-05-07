@@ -27,10 +27,10 @@ var window = {
             }
 
             var request = fetch(ajaxConfig.url, requestOptions);
-                
+
             return request
                 .then(function (response) {
-                  return response.json();
+                    return response.json();
                 })
                 .catch(function (response) {
                     console.log('Failed to execute request to the server: ' + dhisOptions.url + ' with config', ajaxConfig);
@@ -42,8 +42,6 @@ var window = {
 
 //Import the scripts after setting the window object
 //TODO: we can not assume that these are always in this location..
-importScripts('/jspm_packages/npm/d2/d2-sfx.js', '/jspm_packages/npm/babel-core\@5.2.16/browser-polyfill.js');
-
 onmessage = function (message) {
     if (message.data.type === 'init') {
         parseOptions(message.data.options);
@@ -51,6 +49,13 @@ onmessage = function (message) {
         initD2()
             .then(function () {
                 dhisOptions.initialised = true;
+                console.log('D2 Initialisation complete');
+
+                postMessage('init-complete');
+            })
+            .catch(function (error) {
+                console.log('Failed to initialise d2')
+                console.log(error)
             });
         return;
     }
@@ -84,6 +89,9 @@ function parseOptions(options) {
     dhisOptions.url = options.url || dhisOptions.url;
     dhisOptions.username = options.username || dhisOptions.username;
     dhisOptions.password = options.password || dhisOptions.password;
+    options.scripts = options.scripts || ['/d2-sfx.js', 'https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.31.0/es6-shim.js'];
+
+    importScripts.apply(this, options.scripts);
 }
 
 function initD2() {

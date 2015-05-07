@@ -10,12 +10,26 @@ let codeExamples = {
     all: initialiseExamples
 };
 let coderunner;
+let initSuccess;
+let initFailed;
+let codeRunnerInitialized = new Promise(function (resolve, reject) {
+    initSuccess = resolve;
+    initFailed = reject;
+});
 
 function init(exampleRunner = 'src/examplerunner.js', options = {}) {
     addStylesToHead();
 
     //Start the worker that runs the example
-    coderunner = new Worker(exampleRunner);
+    coderunner = new Worker(exampleRunner)
+    coderunner.addEventListener('message', initListener);
+
+    function initListener(event) {
+        if (event.data === 'init-complete') {
+            initSuccess();
+        }
+        coderunner.removeEventListener('message', initListener);
+    }
 
     //Initialise the worker with the settings for api communication
     coderunner.postMessage({
@@ -172,8 +186,14 @@ function getCodeMirrorOptions() {
 
 function getRunButton() {
     let runButtonElement = document.createElement('button');
-    runButtonElement.textContent = 'Run!';
+    runButtonElement.textContent = 'Initialising D2..';
+    runButtonElement.disabled = true;
     runButtonElement.classList.add('d2-runnable-code-example-run-button');
+
+    codeRunnerInitialized.then(function () {
+        runButtonElement.textContent = 'Run!';
+        runButtonElement.disabled = false;
+    });
 
     runButtonElement.addEventListener('click', function (event) {
         if (this.data && this.data.codeMirror) {

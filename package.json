@@ -1,6 +1,6 @@
 {
   "name": "d2-code-example-runner",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Highlights or runs code examples for d2. The DHIS2 javascript library.",
   "main": "src/codeExamples.js",
   "scripts": {
