@@ -42,7 +42,7 @@ var window = {
 
 //Import the scripts after setting the window object
 //TODO: we can not assume that these are always in this location..
-importScripts('../jspm_packages/npm/d2/d2-sfx.js', '../jspm_packages/npm/babel\@4.7.16/browser-polyfill.js');
+importScripts('/jspm_packages/npm/d2/d2-sfx.js', '/jspm_packages/npm/babel-core\@5.2.16/browser-polyfill.js');
 
 onmessage = function (message) {
     if (message.data.type === 'init') {
